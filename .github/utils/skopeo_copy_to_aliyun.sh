@@ -12,7 +12,7 @@ fi
 while read -r image
 do
     image_name=${image##*/}
-    skopeo_msg="skopeo copy $REGISTRY/$image to registry.cn-hangzhou.aliyuncs.com/apecloud/$image_name"
+    skopeo_msg="skopeo copy $REGISTRY/$image to registry.cn-hangzhou.aliyuncs.com/xuriwuyun/$image_name"
     echo "$skopeo_msg"
     skopeo_flag=0
     for i in {1..10}; do
@@ -20,7 +20,7 @@ do
             --dest-username "$ALIYUN_USERNAME" \
             --dest-password "$ALIYUN_PASSWORD" \
             docker://$REGISTRY/$image \
-            docker://registry.cn-hangzhou.aliyuncs.com/apecloud/$image_name)
+            docker://registry.cn-hangzhou.aliyuncs.com/xuriwuyun/$image_name)
         echo "return message:$ret_msg"
         if [[ "$ret_msg" == *"Storing list signatures"* || "$ret_msg" == *"Skipping"* ]]; then
             echo "$(tput -T xterm setaf 2)$skopeo_msg success$(tput -T xterm sgr0)"
